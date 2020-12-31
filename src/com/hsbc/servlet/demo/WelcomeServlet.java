@@ -1,6 +1,7 @@
 package com.hsbc.servlet.demo;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.hsbc.service.demo.WelcomeService;
 
 /**
  * Servlet implementation class WelcomeServlet
@@ -28,9 +31,12 @@ public class WelcomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1.- Create the data (model) and then add it to the request object, set Attribute is a nice way of saving data and use it in the jsp
-		String welcomeMessage[] = {"Hello", "Welcome to the spring course"}; 
-		request.setAttribute("myWelcomeMessages", welcomeMessage);
+	
+		//1.- Create the data (model) and add to request object
+		//Invoke business layer
+		WelcomeService welcomeService = new WelcomeService();
+		List<String> welcomeMessage = welcomeService.getWelcomeMessage("Sergio Paul");
+		request.setAttribute("myWelcomeMessage", welcomeMessage);
 		
 		//2.- Retrieve request dispatcher, sync files
 		RequestDispatcher requestDispatcher= request.getRequestDispatcher("welcome.jsp");

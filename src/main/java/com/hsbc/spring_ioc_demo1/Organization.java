@@ -7,4 +7,5 @@ public class Organization {
 		System.out.println(slogan);
 	}
 
+	
 }

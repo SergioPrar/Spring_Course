@@ -1,13 +1,14 @@
 package com.hsbc.spring_ioc_demo1;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class IOCApp1 {
 
 	public static void main(String[] args) {
 		// Create the application context (container)-- this is the actuall IoC container
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("beans.xml");	
+		//for using the ClassPath we nedd the file to be on the classpath, for this we need to create a resource folder
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");	
 		
 		//create the bean  - inyecting the bean instance
 		Organization org = (Organization) ctx.getBean("myorg");
@@ -16,7 +17,7 @@ public class IOCApp1 {
 		org.corporateSlogan();
 		
 		//close the application context
-		((FileSystemXmlApplicationContext) ctx).close();
+		((ClassPathXmlApplicationContext) ctx).close();
 
 	}
 
